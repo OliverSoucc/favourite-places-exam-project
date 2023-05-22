@@ -1,15 +1,40 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:native_device_features/providers/user_places.dart';
+import 'package:native_device_features/widgets/image_input.dart';
+import 'package:native_device_features/widgets/location_input.dart';
+
+import '../model/place_locations_model.dart';
 
 //TODO, ak bude cas zmenit na Form widget
-class AddPlaceScreen extends StatefulWidget {
+class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
 
   @override
-  State<AddPlaceScreen> createState() => _AddPlaceScreenState();
+  ConsumerState<AddPlaceScreen> createState() => _AddPlaceScreenState();
 }
 
-class _AddPlaceScreenState extends State<AddPlaceScreen> {
+class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
+  File? _selectedImage;
+  PlaceLocation? _selectedLocation;
+
+  void _savePlace() {
+    final enteredTitle = _titleController.text;
+
+    if (enteredTitle.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
+      return;
+    }
+
+    ref
+        .read(userPlacesProvider.notifier)
+        .addPlace(enteredTitle, _selectedImage!, _selectedLocation!);
+    Navigator.of(context).pop();
+  }
 
   @override
   void dispose() {
@@ -36,8 +61,24 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             const SizedBox(
               height: 16,
             ),
+            ImageInput(
+              onPickImage: (File image) {
+                _selectedImage = image;
+              },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            LocationInput(
+              onSelectLocation: (location) {
+                _selectedLocation = location;
+              },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: _savePlace,
               icon: const Icon(Icons.add),
               label: const Text('Add place'),
             )
