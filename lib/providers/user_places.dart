@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:native_device_features/services/app_services.dart';
 import '../model/place_locations_model.dart';
 import '../model/place_model.dart';
+import 'package:path_provider/path_provider.dart' as syspaths;
+import 'package:path/path.dart' as path;
 
 class UserPlacesNotifier extends StateNotifier<List<Place>> {
   UserPlacesNotifier() : super(const []);
@@ -16,11 +18,12 @@ class UserPlacesNotifier extends StateNotifier<List<Place>> {
     // final copiedImage = await image.copy('${appDir.path}/$fileName');
 
     // final newPlace =
-    //     Place(title: title, image: copiedImage, location: placeLocation);
+    //     Place(title: title, image: copiedImage.path, location: placeLocation);
     // state = [newPlace, ...state];
   }
 
   Future<void> loadPlaces() async {
+    //tu img retrievnem File(place.image)
     final userPlaces = await AppServices.loadPlaces();
     state = userPlaces;
   }

@@ -4,11 +4,15 @@
 
 import 'dart:convert';
 
-List<Place> placeFromJson(String str) =>
+Place placeFromJson(String str) => Place.fromJson(json.decode(str));
+
+List<Place> placesFromJson(String str) =>
     List<Place>.from(json.decode(str).map((x) => Place.fromJson(x)));
 
-String placeToJson(List<Place> data) =>
+String placesToJson(List<Place> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+Object placeToJson(Place data) => json.encode(data.toJson());
 
 class Place {
   String? id;
@@ -37,8 +41,7 @@ class Place {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
+        "userId": userId,
         "title": title,
         "image": image,
         "type": type,

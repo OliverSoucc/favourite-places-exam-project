@@ -7,6 +7,10 @@ import 'dart:convert';
 PlaceLocation placeLocationFromJson(String str) =>
     PlaceLocation.fromJson(json.decode(str));
 
+List<PlaceLocation> placeLocationsFromJson(String str) =>
+    List<PlaceLocation>.from(
+        json.decode(str).map((x) => PlaceLocation.fromJson(x)));
+
 String placeLocationToJson(PlaceLocation data) => json.encode(data.toJson());
 
 class PlaceLocation {
@@ -30,7 +34,6 @@ class PlaceLocation {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "address": address,
         "latitude": latitude,
         "longtitude": longtitude,

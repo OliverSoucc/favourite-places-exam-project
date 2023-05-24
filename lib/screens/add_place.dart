@@ -3,14 +3,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:native_device_features/providers/user_places.dart';
+import 'package:native_device_features/screens/places.dart';
+import 'package:native_device_features/services/app_services.dart';
 import 'package:native_device_features/widgets/image_input.dart';
 import 'package:native_device_features/widgets/location_input.dart';
 
 import '../model/place_locations_model.dart';
+import '../model/place_model.dart';
 
 //TODO, ak bude cas zmenit na Form widget
 class AddPlaceScreen extends ConsumerStatefulWidget {
-  const AddPlaceScreen({super.key});
+  const AddPlaceScreen({super.key, required this.signedUser});
+
+  final String signedUser;
 
   @override
   ConsumerState<AddPlaceScreen> createState() => _AddPlaceScreenState();
@@ -21,7 +26,7 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   File? _selectedImage;
   PlaceLocation? _selectedLocation;
 
-  void _savePlace() {
+  void _savePlace() async {
     final enteredTitle = _titleController.text;
 
     if (enteredTitle.isEmpty ||
@@ -30,10 +35,27 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
       return;
     }
 
-    ref
-        .read(userPlacesProvider.notifier)
-        .addPlace(enteredTitle, _selectedImage!, _selectedLocation!);
-    Navigator.of(context).pop();
+    print('toto je userID v AddPlace ${widget.signedUser}');
+    // print('addressa je toto ${_selectedLocation!.address!}');
+
+    final Place place = await AppServices.createPlace(
+        _selectedLocation!.address!,
+        _selectedLocation!.latitude!,
+        _selectedLocation!.longtitude!,
+        widget.signedUser,
+        enteredTitle,
+        _selectedImage!,
+        'dfdfdf');
+
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => PlacesScreen(
+              signedUser: widget.signedUser,
+              newPlace: place,
+            )));
+
+    // ref
+    //     .read(userPlacesProvider.notifier)
+    //     .addPlace(enteredTitle, _selectedImage!, _selectedLocation!);
   }
 
   @override
