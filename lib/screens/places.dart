@@ -28,8 +28,6 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final userPlaces = ref.watch(userPlacesProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Places'),

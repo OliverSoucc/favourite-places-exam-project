@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final place = placeFromJson(jsonString);
-
 import 'dart:convert';
 
 Place placeFromJson(String str) => Place.fromJson(json.decode(str));

@@ -13,11 +13,6 @@ class PlaceDetailScreen extends StatelessWidget {
   final PlaceLocation placeLocation;
   final Place place;
 
-  // PlaceLocation get getPlaceLocation() async {
-  //   PlaceLocation placeLocation = await AppServices.loadPlaceLocation(placeLocationId);
-  //   return placeLocation;
-
-  // }
 
   String? get locationImage {
     final lat = placeLocation.latitude;
