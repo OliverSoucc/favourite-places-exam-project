@@ -58,14 +58,6 @@ class AppServices {
     String placeEndpoint =
         'http://ec2-16-16-160-190.eu-north-1.compute.amazonaws.com/place';
 
-    // Object jsonPLaceLocation = placeLocationToJson(PlaceLocation(
-    //     address: address, latitude: latitude, longtitude: longtitude));
-
-    // print(address);
-    // print(latitude);
-    // print(longtitude);
-    // print(userId);
-
     var body = json.encode(
         {"address": address, "latitude": latitude, "longtitude": longtitude});
 
@@ -78,9 +70,6 @@ class AppServices {
       final PlaceLocation placeLocation =
           placeLocationFromJson(placeLocationResponse.body);
 
-      print(placeLocation.id);
-      print('toto je user Id v AppService ${userId}');
-
       final appDir = await syspaths.getApplicationDocumentsDirectory();
       final fileName = path.basename(image.path);
       final copiedImage = await image.copy('${appDir.path}/$fileName');
@@ -92,9 +81,8 @@ class AppServices {
         "type": "best",
         "place_location_id": placeLocation.id
       });
-      print('${placeResponse.statusCode} place status code');
+
       if (placeResponse.statusCode == 201) {
-        print('done with place');
         return placeFromJson(placeResponse.body);
       } else {
         throw Exception('${placeResponse.reasonPhrase} from Place');

@@ -1,39 +1,36 @@
-import 'dart:io';
-import 'dart:convert';
+// import 'dart:io';
 
-import 'package:http/http.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:native_device_features/services/app_services.dart';
-import '../model/place_locations_model.dart';
-import '../model/place_model.dart';
-import 'package:path_provider/path_provider.dart' as syspaths;
-import 'package:path/path.dart' as path;
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:native_device_features/services/app_services.dart';
+// import '../model/place_locations_model.dart';
+// import '../model/place_model.dart';
 
-class UserPlacesNotifier extends StateNotifier<List<Place>> {
-  UserPlacesNotifier() : super(const []);
 
-  void addPlace(String title, File image, PlaceLocation placeLocation) async {
-    // final appDir = await syspaths.getApplicationDocumentsDirectory();
-    // final fileName = path.basename(image.path);
-    // final copiedImage = await image.copy('${appDir.path}/$fileName');
+// class UserPlacesNotifier extends StateNotifier<List<Place>> {
+//   UserPlacesNotifier() : super(const []);
 
-    // final newPlace =
-    //     Place(title: title, image: copiedImage.path, location: placeLocation);
-    // state = [newPlace, ...state];
-  }
+//   void addPlace(String title, File image, PlaceLocation placeLocation) async {
+//     // final appDir = await syspaths.getApplicationDocumentsDirectory();
+//     // final fileName = path.basename(image.path);
+//     // final copiedImage = await image.copy('${appDir.path}/$fileName');
 
-  Future<void> loadPlaces() async {
-    //tu img retrievnem File(place.image)
-    final userPlaces = await AppServices.loadPlaces();
-    state = userPlaces;
-  }
+//     // final newPlace =
+//     //     Place(title: title, image: copiedImage.path, location: placeLocation);
+//     // state = [newPlace, ...state];
+//   }
 
-  Future<PlaceLocation> getPlaceLocation(String id) async {
-    final placeLocation = await AppServices.loadPlaceLocation(id);
-    return placeLocation;
-  }
-}
+//   Future<void> loadPlaces() async {
+//     //tu img retrievnem File(place.image)
+//     final userPlaces = await AppServices.loadPlaces();
+//     state = userPlaces;
+//   }
 
-final userPlacesProvider =
-    StateNotifierProvider<UserPlacesNotifier, List<Place>>(
-        (ref) => UserPlacesNotifier());
+//   Future<PlaceLocation> getPlaceLocation(String id) async {
+//     final placeLocation = await AppServices.loadPlaceLocation(id);
+//     return placeLocation;
+//   }
+// }
+
+// final userPlacesProvider =
+//     StateNotifierProvider<UserPlacesNotifier, List<Place>>(
+//         (ref) => UserPlacesNotifier());

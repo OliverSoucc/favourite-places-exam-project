@@ -25,17 +25,7 @@ class _PlacesListState extends State<PlacesList> {
   void initState() {
     super.initState();
     _placeLocationsFuture = AppServices.loadPlaceLocations();
-    // AppServices.loadPlaceLocations().then((value) => print(value));
   }
-
-  // List<Place> placeListWithNewPlace(List<>) {
-  //   if(widget.newPlace != null){
-  //     widget.places.add(widget.newPlace);
-  //     return
-  //   }
-
-  //   return
-  // }
 
   @override
   Widget build(BuildContext context) {

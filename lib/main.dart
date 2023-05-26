@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:native_device_features/screens/places.dart';
 import 'package:native_device_features/screens/sign_up.dart';
 
 final colorScheme = ColorScheme.fromSeed(
