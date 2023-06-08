@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Great Places',
       theme: theme,
-      home: SignUp(),
+      home: const SignUp(),
     );
   }
 }
